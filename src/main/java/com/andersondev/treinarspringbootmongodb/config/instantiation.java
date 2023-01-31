@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.andersondev.treinarspringbootmongodb.domain.Post;
 import com.andersondev.treinarspringbootmongodb.domain.User;
 import com.andersondev.treinarspringbootmongodb.dto.AuthorDTO;
+import com.andersondev.treinarspringbootmongodb.dto.CommentDTO;
 import com.andersondev.treinarspringbootmongodb.repository.PostRepository;
 import com.andersondev.treinarspringbootmongodb.repository.UserRepository;
 
@@ -40,6 +41,14 @@ public class instantiation implements CommandLineRunner {
 		Post post1 = new Post(null, sdf.parse("30/01/2023"), "Chovendo aqui", "Muita chuva em São Paulo", new AuthorDTO(maria));
 		Post post2 = new Post(null, sdf.parse("30/01/2023"), "Vascão Hoje", "Vasco joga hoje em Cariacica", new AuthorDTO(maria));
 		Post post3 = new Post(null, sdf.parse("30/01/2023"), "Flamengo Cheirinho", "Palmeiras detonou o flamengo", new AuthorDTO(bob));
+		
+		CommentDTO c1 = new CommentDTO("Espero que tenha levado o guarda-chuva", sdf.parse("30/01/2023"), new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO("Não deu pro Vasco minha querida", sdf.parse("30/01/2023"), new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO("Nem da pra zoar o Mengo, Vasco ta muito fraco ainda", sdf.parse("30/01/2023"), new AuthorDTO(maria));
+		
+		post1.getComments().add(c1);
+		post2.getComments().add(c2);
+		post3.getComments().add(c3);
 		
 		postRepository.saveAll(Arrays.asList(post1, post2, post3));
 		
