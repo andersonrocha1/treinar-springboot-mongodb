@@ -12,22 +12,29 @@ import com.andersondev.treinarspringbootmongodb.services.exception.ObjectNotFoun
 
 @Service
 public class PostService {
-	
+
 	@Autowired
 	private PostRepository repository;
 
-	
 	public Post findById(String id) {
-		
+
 		Optional<Post> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
-		
+
 	}
 	
-	public List<Post> findByTitle(String text){
-		
-		return repository.findByTitleContainingIgnoreCase(text);
-		
+	  public List<Post> findByTitle(String text){ 
+	  //Sem @Query return
+		  return repository.findByTitleContainingIgnoreCase(text);
+	  
+	  }
+	 
+
+	public List<Post> findBySearchTitle(String text) {
+		// Com o @Query
+
+		return repository.findBySearchTitle(text);
+
 	}
 
 }
